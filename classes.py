@@ -11,15 +11,26 @@ class Paddler:
 
 	def printPaddler(self):
 		print(self.Name , self.Weight, self.Gender, self.Side, self.TimeTrial, self.Notes)
-		# sys.stdout.write(self.name)
-		# sys.stdout.flush()
-		# sys.stdout.write(self.weight)
-		# sys.stdout.flush()
-		# sys.stdout.write(self.gender)
-		# sys.stdout.flush()
+		
+	def printPaddler(self, index):
+		print(index, self.Name , self.Weight, self.Gender, self.Side, self.TimeTrial, self.Notes)
 
 class Boat:
-	def __init__(self, leftSide, rightSide, subs):
-		self.leftSide = leftSide
-		self.rightSide = rightSide
-		self.subs = subs
+	def __init__(self, BoatNumber, leftSide, rightSide, subs):
+		self.BoatNumber = BoatNumber
+		self.LeftSide = leftSide
+		self.RightSide = rightSide
+		self.Subs = subs
+
+	def printBoat(self):
+		print('Boat: ', self.BoatNumber)
+		print('Boat Left Side: ')
+		for i in range(0, len(self.LeftSide)):
+			self.LeftSide[i].printPaddler(i + 1)
+		print('Boat Right Side: ')
+		for i in range(0, len(self.RightSide)):
+			self.RightSide[i].printPaddler(i + 1)
+		print('Boat Substitutes: ')
+		for i in range(0, len(self.Subs)):
+			self.Subs[i].printPaddler(i + 1)
+	

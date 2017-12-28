@@ -23,7 +23,11 @@ from openpyxl import load_workbook
 
 # Load a sheet into a DataFrame by name: df1
 # df1 = xl.parse('Sheet1')
-
+def TotalWeight(Side):
+	weight = 0;
+	for i in range(0,len(Side)):
+		weight = weight + Side[i].Weight
+	return weight
 
 wb = load_workbook('./List.xlsx')
 
@@ -130,19 +134,59 @@ while i < len(AllPaddlers):
 			
 			# print('Female ', FemaleCounter, ' Added')
 	i += 1
-		
-# print(numMales + numFemales)
-# print(len(BoatBoth) + len(BoatLeft) + len(BoatRight))
 
-print('Left Paddlers:')
-for i in range (0, len(BoatLeft)):
-	BoatLeft[i].printPaddler()
-print('Right Paddlers:')
-for i in range (0, len(BoatRight)):
-	BoatRight[i].printPaddler()
-print('Both: ')
-for i in range (0, len(BoatBoth)):
-	BoatBoth[i].printPaddler()
+# BoatLeft.sort(key=operator.attrgetter('Weight'))
+# BoatRight.sort(key=operator.attrgetter('Weight'))
+# BoatBoth.sort(key=operator.attrgetter('Weight'))
+
+
+i = 0		
+while len(BoatBoth) != 0:
+	if len(BoatRight) < BoatSize / 2:
+		BoatRight.append(BoatBoth[i])
+		BoatBoth.remove(BoatBoth[i])
+	if len(BoatLeft) < BoatSize / 2:
+		BoatLeft.append(BoatBoth[i])
+		BoatBoth.remove(BoatBoth[i])
+
+Substitutes = []
+AllPaddlers.reverse()
+while len(Substitutes) < 4 and len(AllPaddlers) > 0:
+	Substitutes.append(AllPaddlers.pop())
+AllPaddlers.reverse()
+
+BoatLeft.sort(key=operator.attrgetter('Weight'))
+BoatRight.sort(key=operator.attrgetter('Weight'))
+
+WeightSortedLeft = []
+WeightSortedRight = []
+
+for i in range(0, len(BoatLeft)):
+	if i % 2 == 0:
+		WeightSortedLeft.append(BoatLeft[len(BoatLeft) - i - 1])
+	else:
+		WeightSortedLeft.insert(0, BoatLeft[len(BoatLeft) - i - 1])
+
+
+for i in range(0, len(BoatRight)):
+	if i % 2 == 0:
+		WeightSortedRight.append(BoatRight[len(BoatRight) - i - 1])
+	else:
+		WeightSortedRight.insert(0, BoatRight[len(BoatRight) - i - 1])
+
+Boats = []
+Boats.append(Boat(1, WeightSortedLeft, WeightSortedRight, Substitutes))
+Boats[0].printBoat()
+
+# print('Left Paddlers:')
+# for i in range (0, len(BoatLeft)):
+# 	BoatLeft[i].printPaddler()
+# print('Right Paddlers:')
+# for i in range (0, len(BoatRight)):
+# 	BoatRight[i].printPaddler()
+# print('Both: ')
+# for i in range (0, len(BoatBoth)):
+# 	BoatBoth[i].printPaddler()
 
 # print(sheet.cell(row=j, column=i).value)
 
