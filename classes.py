@@ -2,15 +2,15 @@ import sys
 
 class Paddler:
 	def __init__(self, name, weight, gender, side, timetrial, notes):
-		self.name = name
-		self.weight = weight
-		self.gender = gender
-		self.side = side
-		self.timetrial = timetrial
-		self.notes = notes
+		self.Name = name
+		self.Weight = weight
+		self.Gender = gender
+		self.Side = side
+		self.TimeTrial = timetrial
+		self.Notes = notes
 
 	def printPaddler(self):
-		print(self.name , self.weight, self.gender, self.side, self.timetrial, self.notes)
+		print(self.Name , self.Weight, self.Gender, self.Side, self.TimeTrial, self.Notes)
 		# sys.stdout.write(self.name)
 		# sys.stdout.flush()
 		# sys.stdout.write(self.weight)
