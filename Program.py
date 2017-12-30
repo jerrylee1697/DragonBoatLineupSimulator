@@ -24,6 +24,7 @@ from openpyxl import load_workbook
 
 # Load a sheet into a DataFrame by name: df1
 # df1 = xl.parse('Sheet1')
+
 def TotalWeight(Side):
 	weight = 0;
 	for i in range(0,len(Side)):
@@ -182,7 +183,9 @@ while B < numBoats:
 
 
 	Boats.append(Boat(B + 1, WeightSortedLeft, WeightSortedRight, Substitutes))
+	# print('Left Side Total Weight:', TotalWeight(Boats[B].LeftSide))
 	B += 1
+
 
 
 for i in range(0, len(Boats)):
@@ -202,6 +205,19 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 	sheet1.write(RowLastUsed, 0, 'Left Side Paddlers: ')
 	sheet1.write(RowLastUsed, 7, 'Right Side Paddlers: ')
 	RowLastUsed += 1
+	sheet1.write(RowLastUsed, 0, 'Name: ')
+	sheet1.write(RowLastUsed, 1, 'Weight: ')
+	sheet1.write(RowLastUsed, 2, 'Gender: ')
+	sheet1.write(RowLastUsed, 3, 'Side: ')
+	sheet1.write(RowLastUsed, 4, 'Trial Time: ')
+	sheet1.write(RowLastUsed, 5, 'Notes: ')
+	sheet1.write(RowLastUsed, 7, 'Name: ')
+	sheet1.write(RowLastUsed, 8, 'Weight: ')
+	sheet1.write(RowLastUsed, 9, 'Gender: ')
+	sheet1.write(RowLastUsed, 10, 'Side: ')
+	sheet1.write(RowLastUsed, 11, 'Trial Time: ')
+	sheet1.write(RowLastUsed, 12, 'Notes: ')
+	RowLastUsed += 1
 	for j in range(0, len(Boats[i].LeftSide)):	# j = Sides titles
 		sheet1.write(j + RowLastUsed, 0, Boats[i].LeftSide[j].Name)
 		sheet1.write(j + RowLastUsed, 1, Boats[i].LeftSide[j].Weight)
@@ -217,7 +233,22 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 		sheet1.write(j + RowLastUsed, 11, Boats[i].RightSide[j].TimeTrial)
 		sheet1.write(j + RowLastUsed, 12, Boats[i].RightSide[j].Notes)
 	RowLastUsed += len(Boats[i].LeftSide)
+	sheet1.write(RowLastUsed, 0, 'Total Left Weight: ')
+	LeftTotalWeight = TotalWeight(Boats[i].LeftSide)
+	sheet1.write(RowLastUsed, 1, LeftTotalWeight)
+	sheet1.write(RowLastUsed, 7, 'Total Right Weight: ')
+	RightTotalWeight = TotalWeight(Boats[i].RightSide)
+	sheet1.write(RowLastUsed, 8, RightTotalWeight)
+	RowLastUsed += 1
+
 	sheet1.write(RowLastUsed, 0, 'Substitute Paddlers: ')
+	RowLastUsed += 1
+	sheet1.write(RowLastUsed, 0, 'Name: ')
+	sheet1.write(RowLastUsed, 1, 'Weight: ')
+	sheet1.write(RowLastUsed, 2, 'Gender: ')
+	sheet1.write(RowLastUsed, 3, 'Side: ')
+	sheet1.write(RowLastUsed, 4, 'Trial Time: ')
+	sheet1.write(RowLastUsed, 5, 'Notes: ')
 	RowLastUsed += 1
 	for m in range(0, len(Boats[i].Subs)):
 		sheet1.write(m + RowLastUsed, 0, Boats[i].Subs[m].Name)

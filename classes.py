@@ -15,6 +15,9 @@ class Paddler:
 	def printPaddler(self, index):
 		print(index, self.Name , self.Weight, self.Gender, self.Side, self.TimeTrial, self.Notes)
 
+	def getWeight(self):
+		return self.Weight
+
 class Boat:
 	def __init__(self, BoatNumber, leftSide, rightSide, subs):
 		self.BoatNumber = BoatNumber
@@ -34,3 +37,15 @@ class Boat:
 		for i in range(0, len(self.Subs)):
 			self.Subs[i].printPaddler(i + 1)
 	
+	# def findLeftWeight(self):
+	# 	totalWeight = 0
+	# 	for i in range(0, len(self.LeftSide)):
+	# 		totalWeight += self.LeftSide[i].getWeight()
+	# 	return totalWeight
+
+	# def findRightWeight(self):
+	# 	totalWeight = 0
+	# 	for i in range(0, len(self.RightSide)):
+	# 		totalWeight += self.RightSide[i].getWeight()
+	# 	return totalWeight
+
