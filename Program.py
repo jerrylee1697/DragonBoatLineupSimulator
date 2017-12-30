@@ -1,4 +1,5 @@
 import os
+import xlwt
 import pandas as pd 
 import operator
 
@@ -72,7 +73,7 @@ while B < numBoats:
 	Both = []
 
 	# Seperates into Left, Right and Both Side preferences
-	for i in range (0, numPaddlers):
+	for i in range (0, len(AllPaddlers)):
 		if AllPaddlers[i].Side == 'L':
 			LeftPaddlers.append(AllPaddlers[i])
 		elif AllPaddlers[i].Side == 'R':
@@ -81,7 +82,7 @@ while B < numBoats:
 			Both.append(AllPaddlers[i])
 
 	while 1:
-		SplitRatio = input('Choose option for Gender Split Ratio (Male:Female): \n1. 10:10 \n2. 12:6 ')
+		SplitRatio = input('Choose option for Gender Split Ratio (Male:Female) for boat: \n1. 10:10 \n2. 12:6 ')
 		
 		if SplitRatio == 1:
 			numMales = 10
@@ -184,7 +185,51 @@ while B < numBoats:
 	B += 1
 
 
-Boats[0].printBoat()
+for i in range(0, len(Boats)):
+	Boats[i].printBoat()
+
+
+book = xlwt.Workbook(encoding='utf-8')
+
+sheet1 = book.add_sheet("Python Sheet 1")
+
+# Row/Column
+RowLastUsed = 0
+for i in range(0, len(Boats)):	# i = Number of Boats
+	BoatNumber = 'Boat ' + str(i + 1) 
+	sheet1.write(RowLastUsed, 0, BoatNumber)
+	RowLastUsed += 1
+	sheet1.write(RowLastUsed, 0, 'Left Side Paddlers: ')
+	sheet1.write(RowLastUsed, 7, 'Right Side Paddlers: ')
+	RowLastUsed += 1
+	for j in range(0, len(Boats[i].LeftSide)):	# j = Sides titles
+		sheet1.write(j + RowLastUsed, 0, Boats[i].LeftSide[j].Name)
+		sheet1.write(j + RowLastUsed, 1, Boats[i].LeftSide[j].Weight)
+		sheet1.write(j + RowLastUsed, 2, Boats[i].LeftSide[j].Gender)
+		sheet1.write(j + RowLastUsed, 3, Boats[i].LeftSide[j].Side)
+		sheet1.write(j + RowLastUsed, 4, Boats[i].LeftSide[j].TimeTrial)
+		sheet1.write(j + RowLastUsed, 5, Boats[i].LeftSide[j].Notes)
+
+		sheet1.write(j + RowLastUsed, 7, Boats[i].RightSide[j].Name)
+		sheet1.write(j + RowLastUsed, 8, Boats[i].RightSide[j].Weight)
+		sheet1.write(j + RowLastUsed, 9, Boats[i].RightSide[j].Gender)
+		sheet1.write(j + RowLastUsed, 10, Boats[i].RightSide[j].Side)
+		sheet1.write(j + RowLastUsed, 11, Boats[i].RightSide[j].TimeTrial)
+		sheet1.write(j + RowLastUsed, 12, Boats[i].RightSide[j].Notes)
+	RowLastUsed += len(Boats[i].LeftSide)
+	sheet1.write(RowLastUsed, 0, 'Substitute Paddlers: ')
+	RowLastUsed += 1
+	for m in range(0, len(Boats[i].Subs)):
+		sheet1.write(m + RowLastUsed, 0, Boats[i].Subs[m].Name)
+		sheet1.write(m + RowLastUsed, 1, Boats[i].Subs[m].Weight)
+		sheet1.write(m + RowLastUsed, 2, Boats[i].Subs[m].Gender)
+		sheet1.write(m + RowLastUsed, 3, Boats[i].Subs[m].Side)
+		sheet1.write(m + RowLastUsed, 4, Boats[i].Subs[m].TimeTrial)
+		sheet1.write(m + RowLastUsed, 5, Boats[i].Subs[m].Notes)
+	RowLastUsed += len(Boats[i].Subs)
+	RowLastUsed += 1
+
+book.save("spreadsheet.xls")
 
 # print('Left Paddlers:')
 # for i in range (0, len(BoatLeft)):
