@@ -1,5 +1,6 @@
 import os
 import xlwt
+import datetime, xlrd
 import pandas as pd 
 import operator
 
@@ -50,6 +51,8 @@ numPaddlers = input('Input number of Paddlers: ')
 # All Paddler Information passed into AllPaddlers
 AllPaddlers = []
 
+# TimeTrialFormat = wb.add_format({'Time Format': 'Min:Sec.MSec'})
+
 for i in range (2,numPaddlers + 2):
 	name = sheet.cell(row=i, column=1).value
 	weight = sheet.cell(row=i, column=2).value
@@ -58,7 +61,6 @@ for i in range (2,numPaddlers + 2):
 	time = sheet.cell(row=i, column=5).value
 	notes = sheet.cell(row=i, column=6).value
 	newPaddler = Paddler(name, weight, gender, side, time, notes)
-	# newPaddler.printPaddler()
 	AllPaddlers.append(newPaddler)
 
 
@@ -245,7 +247,12 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 		sheet1.write(j + RowLastUsed, 10, Boats[i].RightSide[j].Side)
 		sheet1.write(j + RowLastUsed, 11, Boats[i].RightSide[j].TimeTrial)
 		sheet1.write(j + RowLastUsed, 12, Boats[i].RightSide[j].Notes)
-	RowLastUsed += len(Boats[i].LeftSide)
+	
+	if len(Boats[i].LeftSide) > len(Boats[i].RightSide):
+		RowLastUsed += len(Boats[i].LeftSide)
+	else:
+		RowLastUsed += len(Boats[i].RightSide)
+
 	sheet1.write(RowLastUsed, 0, 'Total Left Weight: ')
 	LeftTotalWeight = TotalWeight(Boats[i].LeftSide)
 	sheet1.write(RowLastUsed, 1, LeftTotalWeight)
