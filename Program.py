@@ -61,14 +61,15 @@ for i in range (2,numPaddlers + 2):
 	# newPaddler.printPaddler()
 	AllPaddlers.append(newPaddler)
 
-# Sorts Paddlers by Trial Times
-AllPaddlers.sort(key=operator.attrgetter('TimeTrial'))
+
 
 Boats = []
 numBoats = input('Input number of Boats: ')
 
 B = 0
 while B < numBoats:
+	# Sorts Paddlers by Trial Times
+	AllPaddlers.sort(key=operator.attrgetter('TimeTrial'))
 	LeftPaddlers = []
 	RightPaddlers = []
 	Both = []
@@ -81,6 +82,8 @@ while B < numBoats:
 			RightPaddlers.append(AllPaddlers[i])
 		elif AllPaddlers[i].Side == 'B':
 			Both.append(AllPaddlers[i])
+
+	print('Num Paddlers: ', len(AllPaddlers))
 
 	while 1:
 		SplitRatio = input('Choose option for Gender Split Ratio (Male:Female) for boat: \n1. 10:10 \n2. 12:6 ')
@@ -110,49 +113,59 @@ while B < numBoats:
 		if len(BoatRight) + len(BoatLeft) + len(BoatBoth) < numMales + numFemales:
 			if AllPaddlers[i].Gender == 'M' and MaleCounter < numMales:
 				# print(AllPaddlers[i].printPaddler())
+				print('Male ', MaleCounter + 1, ' Added')
 				if AllPaddlers[i].Side == 'R' and len(BoatRight) < BoatSize / 2:
 					BoatRight.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					MaleCounter += 1
+					i = 0
+					continue
 				elif AllPaddlers[i].Side == 'L' and len(BoatLeft) < BoatSize / 2:
 					BoatLeft.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					MaleCounter += 1
+					i = 0
+					continue
 				elif AllPaddlers[i].Side == 'B' and len(BoatBoth) < BoatSize:
 					BoatBoth.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					MaleCounter += 1
-				# print('Male ', MaleCounter, ' Added')
+					i = 0
+					continue
+				print('Male ', MaleCounter, ' Added')
+				# i += 1
 				# print(MaleCounter)
 			elif AllPaddlers[i].Gender == 'F' and FemaleCounter < numFemales:
 				# print(AllPaddlers[i].printPaddler())
+				print('Female ', FemaleCounter + 1, ' Added')
 				if AllPaddlers[i].Side == 'R' and len(BoatRight) < BoatSize / 2:
 					BoatRight.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					FemaleCounter += 1
+					i = 0
+					continue
 				elif AllPaddlers[i].Side == 'L' and len(BoatLeft) < BoatSize / 2:
 					BoatLeft.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					FemaleCounter += 1
+					i = 0
+					continue
 				elif AllPaddlers[i].Side == 'B' and len(BoatBoth) < BoatSize:
 					BoatBoth.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
 					FemaleCounter += 1
-				
-				# print('Female ', FemaleCounter, ' Added')
-		i += 1
-
-	# BoatLeft.sort(key=operator.attrgetter('Weight'))
-	# BoatRight.sort(key=operator.attrgetter('Weight'))
-	# BoatBoth.sort(key=operator.attrgetter('Weight'))
-
+					i = 0 
+					continue
+				# i += 1
+				print('Female ', FemaleCounter, ' Added')
+		i += 1  
 
 	i = 0		
 	while len(BoatBoth) != 0:
 		if len(BoatRight) < BoatSize / 2:
 			BoatRight.append(BoatBoth[i])
 			BoatBoth.remove(BoatBoth[i])
-		if len(BoatLeft) < BoatSize / 2:
+		elif len(BoatLeft) < BoatSize / 2:
 			BoatLeft.append(BoatBoth[i])
 			BoatBoth.remove(BoatBoth[i])
 
@@ -225,7 +238,7 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 		sheet1.write(j + RowLastUsed, 3, Boats[i].LeftSide[j].Side)
 		sheet1.write(j + RowLastUsed, 4, Boats[i].LeftSide[j].TimeTrial)
 		sheet1.write(j + RowLastUsed, 5, Boats[i].LeftSide[j].Notes)
-
+	for j in range(0, len(Boats[i].RightSide)):
 		sheet1.write(j + RowLastUsed, 7, Boats[i].RightSide[j].Name)
 		sheet1.write(j + RowLastUsed, 8, Boats[i].RightSide[j].Weight)
 		sheet1.write(j + RowLastUsed, 9, Boats[i].RightSide[j].Gender)
@@ -260,7 +273,7 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 	RowLastUsed += len(Boats[i].Subs)
 	RowLastUsed += 1
 
-book.save("spreadsheet.xls")
+book.save("Results.xls")
 
 # print('Left Paddlers:')
 # for i in range (0, len(BoatLeft)):
