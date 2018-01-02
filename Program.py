@@ -1,6 +1,7 @@
 import os
 import xlwt
 import datetime, xlrd
+import time
 import pandas as pd 
 import operator
 
@@ -58,7 +59,15 @@ for i in range (2,numPaddlers + 2):
 	weight = sheet.cell(row=i, column=2).value
 	gender = sheet.cell(row=i, column=3).value
 	side = sheet.cell(row=i, column=4).value
-	time = sheet.cell(row=i, column=5).value
+	TimeInput = str(sheet.cell(row=i, column=5).value)
+	
+	Hours, Minutes, Secs = TimeInput.split(":", 2)
+	# print(Minutes, Secs)
+	time = float(Minutes) * 60 + float(Secs)
+	# T = time.strptime(str(sheet.cell(row=i, column=5).value), '%H:%M:%S.%f')
+	# time = datetime.timedelta(sheet.cell(row=i, column=5).value)
+
+	# time = sheet.cell(row=i, column=5).value
 	notes = sheet.cell(row=i, column=6).value
 	newPaddler = Paddler(name, weight, gender, side, time, notes)
 	AllPaddlers.append(newPaddler)
