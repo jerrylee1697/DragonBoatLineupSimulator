@@ -13,16 +13,17 @@ def TotalWeight(Side):
 		weight = weight + Side[i].Weight
 	return weight
 
-InputFileName = raw_input('Input name of file (include .xlsx extension): ')
+# InputFileName = raw_input('Input name of file (include .xlsx extension): ')
 
-wb = load_workbook(str(InputFileName))
+wb = load_workbook('List.xlsx')
 
 sheet = wb.get_sheet_by_name('Sheet1')
 
 sheet.title
 
 
-numPaddlers = input('Input number of Paddlers: ')
+# numPaddlers = input('Input number of Paddlers: ')
+numPaddlers = 48
 
 # All Paddler Information passed into AllPaddlers
 AllPaddlers = []
@@ -45,7 +46,8 @@ for i in range (2,numPaddlers + 2):
 
 
 Boats = []
-numBoats = input('Input number of Boats: ')
+# numBoats = input('Input number of Boats: ')
+numBoats = 2
 
 B = 0
 while B < numBoats:
@@ -67,8 +69,9 @@ while B < numBoats:
 	# print('Num Paddlers: ', len(AllPaddlers))
 
 	while 1:
-		SplitRatio = input('Choose option for Gender Split Ratio (Male:Female) for boat: \n1. 10:10 \n2. 12:6 ')
-		
+		# SplitRatio = input('Choose option for Gender Split Ratio (Male:Female) for boat: \n1. 10:10 \n2. 12:6 ')
+		SplitRatio = 1
+
 		if SplitRatio == 1:
 			numMales = 10
 			numFemales = 10
@@ -254,5 +257,5 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 	RowLastUsed += len(Boats[i].Subs)
 	RowLastUsed += 1
 
-book.save("Results.xls")
-print('Configuration saved to Results.xls')
+book.save("DefaultResults.xls")
+print('Configuration saved to DefaultResults.xls')
