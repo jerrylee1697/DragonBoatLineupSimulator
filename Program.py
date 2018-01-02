@@ -59,15 +59,11 @@ for i in range (2,numPaddlers + 2):
 	weight = sheet.cell(row=i, column=2).value
 	gender = sheet.cell(row=i, column=3).value
 	side = sheet.cell(row=i, column=4).value
-	TimeInput = str(sheet.cell(row=i, column=5).value)
 	
+	TimeInput = str(sheet.cell(row=i, column=5).value)
 	Hours, Minutes, Secs = TimeInput.split(":", 2)
-	# print(Minutes, Secs)
 	time = float(Minutes) * 60 + float(Secs)
-	# T = time.strptime(str(sheet.cell(row=i, column=5).value), '%H:%M:%S.%f')
-	# time = datetime.timedelta(sheet.cell(row=i, column=5).value)
-
-	# time = sheet.cell(row=i, column=5).value
+	
 	notes = sheet.cell(row=i, column=6).value
 	newPaddler = Paddler(name, weight, gender, side, time, notes)
 	AllPaddlers.append(newPaddler)
@@ -94,7 +90,7 @@ while B < numBoats:
 		elif AllPaddlers[i].Side == 'B':
 			Both.append(AllPaddlers[i])
 
-	print('Num Paddlers: ', len(AllPaddlers))
+	# print('Num Paddlers: ', len(AllPaddlers))
 
 	while 1:
 		SplitRatio = input('Choose option for Gender Split Ratio (Male:Female) for boat: \n1. 10:10 \n2. 12:6 ')
@@ -123,8 +119,7 @@ while B < numBoats:
 	while i < len(AllPaddlers):
 		if len(BoatRight) + len(BoatLeft) + len(BoatBoth) < numMales + numFemales:
 			if AllPaddlers[i].Gender == 'M' and MaleCounter < numMales:
-				# print(AllPaddlers[i].printPaddler())
-				print('Male ', MaleCounter + 1, ' Added')
+				# print('Male ', MaleCounter + 1, ' Added')
 				if AllPaddlers[i].Side == 'R' and len(BoatRight) < BoatSize / 2:
 					BoatRight.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
@@ -143,12 +138,10 @@ while B < numBoats:
 					MaleCounter += 1
 					i = 0
 					continue
-				print('Male ', MaleCounter, ' Added')
-				# i += 1
-				# print(MaleCounter)
+				# print('Male ', MaleCounter, ' Added')
+	
 			elif AllPaddlers[i].Gender == 'F' and FemaleCounter < numFemales:
-				# print(AllPaddlers[i].printPaddler())
-				print('Female ', FemaleCounter + 1, ' Added')
+				# print('Female ', FemaleCounter + 1, ' Added')
 				if AllPaddlers[i].Side == 'R' and len(BoatRight) < BoatSize / 2:
 					BoatRight.append(AllPaddlers[i])
 					AllPaddlers.remove(AllPaddlers[i])
@@ -167,8 +160,7 @@ while B < numBoats:
 					FemaleCounter += 1
 					i = 0 
 					continue
-				# i += 1
-				print('Female ', FemaleCounter, ' Added')
+				# print('Female ', FemaleCounter, ' Added')
 		i += 1  
 
 	i = 0		
@@ -207,13 +199,12 @@ while B < numBoats:
 
 
 	Boats.append(Boat(B + 1, WeightSortedLeft, WeightSortedRight, Substitutes))
-	# print('Left Side Total Weight:', TotalWeight(Boats[B].LeftSide))
 	B += 1
 
 
 
-for i in range(0, len(Boats)):
-	Boats[i].printBoat()
+# for i in range(0, len(Boats)):
+# 	Boats[i].printBoat()
 
 
 book = xlwt.Workbook(encoding='utf-8')
@@ -290,6 +281,7 @@ for i in range(0, len(Boats)):	# i = Number of Boats
 	RowLastUsed += 1
 
 book.save("Results.xls")
+print('Configuration saved to Results.xls')
 
 # print('Left Paddlers:')
 # for i in range (0, len(BoatLeft)):

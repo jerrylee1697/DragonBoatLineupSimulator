@@ -37,15 +37,5 @@ class Boat:
 		for i in range(0, len(self.Subs)):
 			self.Subs[i].printPaddler(i + 1)
 	
-	# def findLeftWeight(self):
-	# 	totalWeight = 0
-	# 	for i in range(0, len(self.LeftSide)):
-	# 		totalWeight += self.LeftSide[i].getWeight()
-	# 	return totalWeight
-
-	# def findRightWeight(self):
-	# 	totalWeight = 0
-	# 	for i in range(0, len(self.RightSide)):
-	# 		totalWeight += self.RightSide[i].getWeight()
-	# 	return totalWeight
+	
 
