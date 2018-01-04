@@ -4,6 +4,11 @@
 Uses paddler data from an Excel spreadsheet and automatically sorts paddlers into simulated boat lineups. 
 The results are outputted to a newly generated Excel spreadsheet.
 
+# Requirements:
+I used the Pandas package to help with importing files.
+I also installed XlsxWriter to write data to .xlsx files.
+
+
 # Programs:
 The program is written using Python.
 Two scripts are available for use - DefaultProgram.py and Program.py.
