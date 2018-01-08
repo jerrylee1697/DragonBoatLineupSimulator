@@ -5,8 +5,7 @@ Uses paddler data from an Excel spreadsheet and automatically sorts paddlers int
 The results are outputted to a newly generated Excel spreadsheet.
 
 # Requirements:
--Pandas package
--XlsxWriter
+Pandas package, XlsxWriter, xlwt, openpyxl
 
 
 # Programs:
